@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
     }
   });
 
-const MyButton = ({ deleteAllItems }) => (
+const MyButton = ({ deleteAllItems, buttonText }) => (
 	<TouchableOpacity onPress={deleteAllItems} /* style={{backgroundColor: 'red'}} */ style={styles.btnClickContain}>
         {/* <MaterialIcons name="delete-sweep" size={24} color={lighterWhite} /> */}
-        <Text style={styles.btnText}>Log-in</Text> 
+        <Text style={styles.btnText}>{buttonText}</Text> 
         <Ionicons name="md-checkmark-circle" size={32} color="green" />
 	</TouchableOpacity>
 );
