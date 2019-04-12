@@ -2,11 +2,18 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+// import { ApolloClient } from 'apollo-client';
+// import { ApolloProvider } from 'react-apollo';
+
 
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
+
+
+  // Create the client as outlined in the setup guide
+  //client = new ApolloClient();
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -19,10 +26,12 @@ export default class App extends React.Component {
       );
     } else {
       return (
+
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <AppNavigator />
         </View>
+
       );
     }
   }

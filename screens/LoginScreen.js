@@ -28,6 +28,38 @@ import {SecureStore} from 'expo';
 import jwtDecode from 'jwt-decode'
 import moment from 'moment'
 
+
+//'clarity-icons-svg/core/cog-line.svg'
+
+//import CogIcon  from 'clarity-icons-svg/core/cog-line.svg';
+
+
+import SvgUri from "expo-svg-uri";
+
+// import Svg, {
+//   Use
+// } from 'react-native-svg';
+
+// import Svg from 'react-native-svg';
+
+//import Logo from "./logo.svg";
+
+import { Svg } from 'expo'
+
+import { graphql } from 'react-apollo'
+// import gql from 'graphql-tag'
+
+// const FEED_QUERY = gql`
+//   query FeedQuery {
+//     feed {
+//       id
+//       text
+//       title
+//       isPublished
+//     }
+//   }
+// `
+
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
     header: null,
@@ -191,6 +223,49 @@ export default class LoginScreen extends React.Component {
 
             <Text style={styles.getStartedText}>Login Screen</Text>
 
+            <Svg height={100} width={100}>
+              <Svg.Circle
+                cx={50}
+                cy={50}
+                r={45}
+                strokeWidth={2.5}
+                stroke="#e74c3c"
+                fill="#f1c40f"
+              />
+              <Svg.Rect
+                x={15}
+                y={15}
+                width={70}
+                height={70}
+                strokeWidth={2}
+                stroke="#9b59b6"
+                fill="#3498db"
+              />
+
+          <SvgUri
+                width="200"
+                height="200"
+                source={{
+                  uri: "http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg"
+                }}
+              />
+
+{/* 'clarity-icons-svg/core/cog-line.svg' */}
+
+          {/* <SvgUri width="200" height="200" source={require("./img/homer-simpson.svg")} /> */}
+
+          {/* <SvgUri width="200" height="200" source={require('clarity-icons-svg/core/cog-line.svg')} /> */}
+
+            {/* <SvgUri
+                width="200"
+                height="200"
+                source={{
+                  uri: 'http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg',
+                }}
+              />*/}
+
+            </Svg> 
+            
             <Ionicons name="md-checkmark-circle" size={32} color="green" />
 
 {/*             <TabBarIcon

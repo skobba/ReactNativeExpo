@@ -12,11 +12,18 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
+    "apollo-client": "^2.5.1",
+    "clarity-icons-svg": "^0.2.0",
     "expo": "^32.0.0",
+    "expo-svg-uri": "^1.0.0",
+    "graphql": "^14.2.1",
+    "graphql-tag": "^2.10.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "react": "16.5.0",
+    "react-apollo": "^2.5.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-svg": "7.0.0",
     "react-navigation": "^3.0.9"
   },
   "devDependencies": {
