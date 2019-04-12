@@ -1,3 +1,9 @@
+# Does not return refresh_token
+
+
+# Keycloak
+
+
 https://accounts.lovogorden.no/auth/realms/lovogorden/.well-known/openid-configuration
 
 https://accounts.lovogorden.no/auth/realms/lovogorden

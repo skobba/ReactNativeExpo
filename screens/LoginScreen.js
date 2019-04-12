@@ -75,9 +75,10 @@ export default class LoginScreen extends React.Component {
   async getUserInfo() {
 
     fetch(
-      "https://accounts.lovogorden.no/auth/realms/lovogorden/protocol/openid-connect/userinfo",
+      //"https://accounts.lovogorden.no/auth/realms/lovogorden/protocol/openid-connect/userinfo",
+      "https://api.lovogorden.no/api/clients",
       { 
-        method: 'post', 
+        method: 'get', 
         headers: new Headers({
           'Authorization': 'Bearer '+this.state.access_token, 
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -119,6 +120,7 @@ export default class LoginScreen extends React.Component {
       issuer: 'https://accounts.lovogorden.no/auth/realms/lovogorden',
       clientId: 'lawreact',
       scopes: ['profile'],
+      extras: {'access_type': 'offline'}
     };
 
     const tokenResponse = await AppAuth.authAsync(config);
