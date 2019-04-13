@@ -223,8 +223,8 @@ export default class LoginScreen extends React.Component {
 
             <Text style={styles.getStartedText}>Login Screen</Text>
 
-            <Svg height={100} width={100}>
-              <Svg.Circle
+   {/*   <Svg height={100} width={100}>
+            <Svg.Circle
                 cx={50}
                 cy={50}
                 r={45}
@@ -240,21 +240,29 @@ export default class LoginScreen extends React.Component {
                 strokeWidth={2}
                 stroke="#9b59b6"
                 fill="#3498db"
-              />
+              /> 
+              
+              </Svg> 
+              
+              */}
 
-          <SvgUri
+          {/* <SvgUri
                 width="200"
                 height="200"
                 source={{
                   uri: "http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg"
                 }}
-              />
+              /> */}
 
 {/* 'clarity-icons-svg/core/cog-line.svg' */}
 
           {/* <SvgUri width="200" height="200" source={require("./img/homer-simpson.svg")} /> */}
+          
 
-          {/* <SvgUri width="200" height="200" source={require('clarity-icons-svg/core/cog-line.svg')} /> */}
+         
+         
+         
+          {/* <SvgUri width="200" height="200" source={require('./node-modules/clarity-icons-svg/core/cog-line.svg')} /> */}
 
             {/* <SvgUri
                 width="200"
@@ -264,8 +272,12 @@ export default class LoginScreen extends React.Component {
                 }}
               />*/}
 
-            </Svg> 
             
+            
+              {/* DENNE VIRKER!!! */}
+            {/* <SvgUri key="vekt" width="200" height="200" source={require('../assets/images/balance-outline.svg')} /> */}
+
+
             <Ionicons name="md-checkmark-circle" size={32} color="green" />
 
 {/*             <TabBarIcon
@@ -323,29 +335,18 @@ export default class LoginScreen extends React.Component {
               onPress={this.handleClick()}
             />
  */}
-            <View style={[styles.codeHighlightContainer, styles.loginScreenFilename]}>
+            {/* <View style={[styles.codeHighlightContainer, styles.loginScreenFilename]}>
               <MonoText style={styles.codeHighlightText}>screens/LoginScreen.js</MonoText>
             </View>
 
             <Text style={styles.getStartedText}>
               Change this text and your app will automatically reload.
-            </Text>
+            </Text> */}
           </View>
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
+
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
       </View>
     );
   }

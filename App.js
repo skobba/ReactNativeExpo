@@ -12,6 +12,77 @@ export default class App extends React.Component {
   };
 
 
+  async componentDidMount() {
+    // try {
+    //   await GoogleSignIn.initAsync({
+    //     isOfflineEnabled: true,
+    //     isPromptEnabled: true,
+    //     clientId,
+    //   });
+    //   this._syncUserWithStateAsync();
+    // } catch ({ message }) {
+    //   alert('GoogleSignIn.initAsync(): ' + message);
+    // }
+  }
+  
+  async handleLogin(){
+    //alert('Log-in clicked!');
+
+    const config = {
+      issuer: 'https://accounts.lovogorden.no/auth/realms/lovogorden',
+      clientId: 'lawreact',
+      scopes: ['profile'],
+      extras: {'access_type': 'offline'}
+    };
+
+    const tokenResponse = await AppAuth.authAsync(config);
+    console.log("*** tokenResponse: " + JSON.stringify(tokenResponse))
+    //console.log("*** tokenResponse (sorted): " + JSON.stringify(Object.keys(tokenResponse).sort()))
+
+    //var highest = tokenResponse[ Object.keys(tokenResponse).sort().pop() ];
+    //console.log("*** highest: " + JSON.stringify(highest,0,3))
+
+
+    console.log("*** access_token: " + tokenResponse.accessToken)
+
+    var fourthKey = Object.keys(tokenResponse).sort()[3];
+    console.log("*** refresh_token: " + fourthKey)
+    
+    
+
+    //var fourthValue = json[fourthKey];
+
+
+    //let myBody = JSON.parse(tokenResponse)
+    //console.log("*** myBody: " + myBody
+
+    let tokenResponseParsed = jwtDecode(tokenResponse.accessToken)
+    console.log("*** tokenResponseParsed: " + JSON.stringify(tokenResponseParsed))
+    
+    
+
+    let access_token = tokenResponse.accessToken;
+
+    this.setState({ 
+      access_token: access_token,
+      refresh_token: fourthKey,
+      tokenResponseParsed: tokenResponseParsed
+     });
+
+    await SecureStore.setItemAsync('access_token', tokenResponse.accessToken);
+    await SecureStore.setItemAsync('refresh_token', fourthKey);
+
+    //this.forceUpdate();
+
+    //const token = await SecureStore.getItemAsync('refresh_token');
+
+//    console.log("*** access_token: " + JSON.stringify(tokenResponse.accessToken))
+    //console.log("*** access_token: " + JSON.stringify(tokenResponse))
+//    console.log(token); // output: sahdkfjaskdflas$%^&
+
+  }
+  
+
   // Create the client as outlined in the setup guide
   //client = new ApolloClient();
 
@@ -41,6 +112,7 @@ export default class App extends React.Component {
       Asset.loadAsync([
         require('./assets/images/robot-dev.png'),
         require('./assets/images/robot-prod.png'),
+        //require('./assets/images/balance-outline.svg'),
       ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
