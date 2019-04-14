@@ -15,3 +15,10 @@ npm i --save react-native-svg
 
 # Svg
 npm i --save expo-svg-uri
+
+# Apollo
+npm i --save react-apollo
+npm i --save apollo-client
+npm i --save apollo-cache-inmemory
+npm i --save apollo-link-context
+npm i --save apollo-link-http

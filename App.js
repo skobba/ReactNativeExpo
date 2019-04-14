@@ -7,11 +7,40 @@ import AppNavigator from './navigation/AppNavigator';
 
 import { AuthProvider } from './components/AuthContext'
 
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { setContext } from 'apollo-link-context';
+import { createHttpLink } from 'apollo-link-http';
+import {SecureStore} from 'expo';
+
 export default class App extends React.Component {
+
   state = {
     isLoadingComplete: false,
   };
 
+  httpLink = createHttpLink({
+    uri: 'http://localhost:4000',
+  });
+
+  authLink = setContext(async (_, { headers }) => {
+    // get the authentication token from local storage if it exists
+  
+    let access_token = await SecureStore.getItemAsync('access_token');
+
+    console.log('*** Token was found: ' + access_token);
+
+    // 2. Return the header with new token if needed
+    console.log('*** setContext');
+    return {
+      headers: {
+        ...headers,
+        authorization: access_token ? `Bearer ${access_token}` : "",
+      }
+    }
+  
+  });
 
   async componentDidMount() {
     // try {
@@ -26,6 +55,18 @@ export default class App extends React.Component {
     // }
   }
   
+  cache = new InMemoryCache();
+  client = new ApolloClient({
+    link: this.authLink.concat(this.httpLink),
+    //link: httpLinkTest,
+    cache: new InMemoryCache(),
+
+    fetchOptions: {
+      mode: 'no-cors', //https://stackoverflow.com/questions/48818582/apollo-client-does-not-work-with-cors
+    },
+  });
+// End - Apollo Client 
+
   async handleLogin(){
     //alert('Log-in clicked!');
 
@@ -99,12 +140,18 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <AuthProvider user={"theuser"} >
-          <View style={styles.container}>
-              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <AppNavigator />
-          </View>
-        </AuthProvider>
+        
+        <ApolloProvider client={this.client}>
+          <AuthProvider user={"theuser"} >
+            <View style={styles.container}>
+                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+              <AppNavigator />
+            </View>
+          </AuthProvider>        
+        </ApolloProvider>
+
+
+        
       );
     }
   }
