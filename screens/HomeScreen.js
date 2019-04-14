@@ -12,13 +12,43 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
+import { AuthConsumer } from '../components/AuthContext';
+
+import {SecureStore} from 'expo';
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      tokenResponseParsed: undefined
+    }
+  
+  }
+
+  async componentDidMount() {
+
+    console.log("*** HomeScreen - componentDidMount ***")
+
+    let preferred_username = await SecureStore.getItemAsync('preferred_username');
+
+    this.setState({ 
+      preferred_username: preferred_username
+     });
+
+    console.log("*** preferred_username: " + JSON.stringify(this.state.preferred_username, 0, 2))
+
+
+  }
+
   render() {
     return (
+      <AuthConsumer>
+      {({ user }) => (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
@@ -36,9 +66,10 @@ export default class HomeScreen extends React.Component {
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
+            
 
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
+              <MonoText style={styles.codeHighlightText}>{this.state.preferred_username}</MonoText>
             </View>
 
             <Text style={styles.getStartedText}>
@@ -61,6 +92,8 @@ export default class HomeScreen extends React.Component {
           </View>
         </View>
       </View>
+      )}
+      </AuthConsumer>
     );
   }
 

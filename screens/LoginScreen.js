@@ -163,10 +163,10 @@ export default class LoginScreen extends React.Component {
     //console.log("*** highest: " + JSON.stringify(highest,0,3))
 
 
-    console.log("*** access_token: " + tokenResponse.accessToken)
+    //console.log("*** access_token: " + tokenResponse.accessToken)
 
     var fourthKey = Object.keys(tokenResponse).sort()[3];
-    console.log("*** refresh_token: " + fourthKey)
+    //console.log("*** refresh_token: " + fourthKey)
     
     
 
@@ -186,11 +186,13 @@ export default class LoginScreen extends React.Component {
     this.setState({ 
       access_token: access_token,
       refresh_token: fourthKey,
+      preferred_username: tokenResponseParsed.preferred_username,
       tokenResponseParsed: tokenResponseParsed
      });
 
     await SecureStore.setItemAsync('access_token', tokenResponse.accessToken);
     await SecureStore.setItemAsync('refresh_token', fourthKey);
+    await SecureStore.setItemAsync('preferred_username', tokenResponseParsed.preferred_username);
 
     //this.forceUpdate();
 
@@ -311,6 +313,8 @@ export default class LoginScreen extends React.Component {
          <Text style={styles.getStartedText}>{( this.state.tokenResponseParsed ? moment(this.state.tokenResponseParsed.exp*1000).format("HH:mm:ss") : "tomt")}</Text>
 
          <Text style={styles.helpLinkText}>{JSON.stringify(this.state.tokenResponseParsed,0,2)}</Text>
+
+
 
 
 {/*           <Button

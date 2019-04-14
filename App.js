@@ -5,6 +5,7 @@ import AppNavigator from './navigation/AppNavigator';
 // import { ApolloClient } from 'apollo-client';
 // import { ApolloProvider } from 'react-apollo';
 
+import { AuthProvider } from './components/AuthContext'
 
 export default class App extends React.Component {
   state = {
@@ -66,11 +67,12 @@ export default class App extends React.Component {
     this.setState({ 
       access_token: access_token,
       refresh_token: fourthKey,
-      tokenResponseParsed: tokenResponseParsed
+      preferred_username: tokenResponse.preferred_username
      });
 
     await SecureStore.setItemAsync('access_token', tokenResponse.accessToken);
     await SecureStore.setItemAsync('refresh_token', fourthKey);
+    await SecureStore.setItemAsync('preferred_username', preferred_username);
 
     //this.forceUpdate();
 
@@ -97,12 +99,12 @@ export default class App extends React.Component {
       );
     } else {
       return (
-
-        <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
-
+        <AuthProvider user={"theuser"} >
+          <View style={styles.container}>
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
+          </View>
+        </AuthProvider>
       );
     }
   }

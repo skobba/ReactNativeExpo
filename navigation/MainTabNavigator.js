@@ -18,14 +18,23 @@ const HomeStack = createStackNavigator({
 HomeStack.navigationOptions = {
   tabBarLabel: 'Hjem',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-        ? `ios-information-circle${focused ? '' : '-outline'}`
-        : 'md-information-circle'
-      }
+
+    // <TabBarIcon
+    //   focused={focused}
+    //   name={
+    //     Platform.OS === 'ios'
+    //     ? `ios-information-circle${focused ? '' : '-outline'}`
+    //     : 'md-information-circle'
+    //   }
+    // />
+
+    <Image
+      source={require('../assets/images/law256.png')}
+      fadeDuration={0}
+      style={{width: 26, height: 26, tintColor: (focused ? Colors.tabIconSelected : Colors.tabIconDefault)}}
+      color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
     />
+
   ),
 };
 
