@@ -6,7 +6,7 @@ import MyButton from '../components/MyButton';
 import { ListItem } from 'react-native-elements'
 import { Card, Avatar, Icon } from 'react-native-elements';
 
-import Store from './Store';
+import MatterScreen from './MatterScreen';
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
 

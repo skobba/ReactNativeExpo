@@ -1,7 +1,7 @@
 import React from "react";
 import{StyleSheet,View,ActivityIndicator,FlatList,Text,TouchableOpacity,Image} from "react-native";
 import { Icon } from "react-native-elements";
-export default class Store extends React.Component { 
+export default class MatterScreen extends React.Component { 
 constructor(props) {
   super(props)
   this.state = {

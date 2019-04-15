@@ -4,11 +4,11 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LoginScreen from '../screens/LoginScreen';
-import LinksScreen from '../screens/LinksScreen';
+import TimeScreen from '../screens/TimeScreen';
+import ClientsScreen from '../screens/ClientsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import FlatListDemo from '../screens/FlatListDemo';
-import Store from '../screens/Store';
+import MatterScreen from '../screens/MatterScreen';
 import NavigationScreen from '../screens/NavigationScreen';
 
 import { Image } from 'react-native';
@@ -46,7 +46,7 @@ HomeStack.navigationOptions = {
 };
 
 const LoginStack = createStackNavigator({
-  Auth: LoginScreen,
+  Auth: TimeScreen,
 });
 
 LoginStack.navigationOptions = {
@@ -70,7 +70,7 @@ LoginStack.navigationOptions = {
 };
 
 const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+  Links: ClientsScreen,
 });
 
 LinksStack.navigationOptions = {
@@ -93,7 +93,7 @@ LinksStack.navigationOptions = {
 
 
 const MattersStack = createStackNavigator({
-  Matters: Store,
+  Matters: MatterScreen,
 });
 
 MattersStack.navigationOptions = {
