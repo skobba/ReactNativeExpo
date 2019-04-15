@@ -7,6 +7,8 @@ import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import FlatListDemo from '../screens/FlatListDemo';
+import Store from '../screens/Store';
 
 import { Image } from 'react-native';
 import Colors from '../constants/Colors';
@@ -83,7 +85,7 @@ const SettingsStack = createStackNavigator({
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Saker',
+  tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
 
     // <Image
@@ -120,6 +122,24 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+
+const MattersStack = createStackNavigator({
+  Matters: Store,
+});
+
+MattersStack.navigationOptions = {
+  tabBarLabel: 'Saker',
+  tabBarIcon: ({ focused }) => (
+
+    <Image
+      source={require('../assets/images/matter80.png')}
+      fadeDuration={0}
+      style={{width: 26, height: 26, tintColor: (focused ? Colors.tabIconSelected : Colors.tabIconDefault)}}
+      color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+    />
+  ),
+};
+
 // export default createBottomTabNavigator({
 //   HomeStack,
 //   LoginStack,
@@ -134,6 +154,7 @@ export default createBottomTabNavigator(
     LoginStack,
     LinksStack,
     SettingsStack,
+    MattersStack,
   },
   {
     // defaultNavigationOptions: ({ navigation }) => ({

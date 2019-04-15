@@ -22,3 +22,6 @@ npm i --save apollo-client
 npm i --save apollo-cache-inmemory
 npm i --save apollo-link-context
 npm i --save apollo-link-http
+
+# FlatListSwmo
+npm i --save react-native-elements
