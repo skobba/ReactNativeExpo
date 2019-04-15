@@ -41,7 +41,7 @@ HomeStack.navigationOptions = {
 };
 
 const LoginStack = createStackNavigator({
-  Home: LoginScreen,
+  Auth: LoginScreen,
 });
 
 LoginStack.navigationOptions = {
@@ -80,6 +80,25 @@ LinksStack.navigationOptions = {
   ),
 };
 
+
+const MattersStack = createStackNavigator({
+  Matters: Store,
+});
+
+MattersStack.navigationOptions = {
+  tabBarLabel: 'Saker',
+  tabBarIcon: ({ focused }) => (
+
+    <Image
+      source={require('../assets/images/matter80.png')}
+      fadeDuration={0}
+      style={{width: 26, height: 26, tintColor: (focused ? Colors.tabIconSelected : Colors.tabIconDefault)}}
+      color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+    />
+  ),
+};
+
+
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
 });
@@ -95,7 +114,7 @@ SettingsStack.navigationOptions = {
     // />
 
     <Image
-      source={require('../assets/images/matter80.png')}
+      source={require('../assets/images/cog80.png')}
       fadeDuration={0}
       style={{width: 26, height: 26, tintColor: (focused ? Colors.tabIconSelected : Colors.tabIconDefault)}}
       color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
@@ -123,23 +142,6 @@ SettingsStack.navigationOptions = {
 };
 
 
-const MattersStack = createStackNavigator({
-  Matters: Store,
-});
-
-MattersStack.navigationOptions = {
-  tabBarLabel: 'Saker',
-  tabBarIcon: ({ focused }) => (
-
-    <Image
-      source={require('../assets/images/matter80.png')}
-      fadeDuration={0}
-      style={{width: 26, height: 26, tintColor: (focused ? Colors.tabIconSelected : Colors.tabIconDefault)}}
-      color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
-    />
-  ),
-};
-
 // export default createBottomTabNavigator({
 //   HomeStack,
 //   LoginStack,
@@ -153,8 +155,8 @@ export default createBottomTabNavigator(
     HomeStack,
     LoginStack,
     LinksStack,
-    SettingsStack,
     MattersStack,
+    SettingsStack,
   },
   {
     // defaultNavigationOptions: ({ navigation }) => ({

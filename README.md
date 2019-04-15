@@ -25,3 +25,6 @@ npm i --save apollo-link-http
 
 # FlatListSwmo
 npm i --save react-native-elements
+
+npm i --save react-native-linear-gradient
+npm i --save react-native-touchable-scale
