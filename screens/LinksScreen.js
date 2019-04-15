@@ -34,7 +34,7 @@ const ClientComponent = graphql(GET_CLIENTS)(props => {
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
-    title: 'Links',
+    title: 'Klienter',
   };
 
 

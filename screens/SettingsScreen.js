@@ -10,6 +10,10 @@ import Store from '../screens/Store';
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
 
+import { createStackNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation'
+
+
 const list = [
   {
     name: 'Amy Farha',

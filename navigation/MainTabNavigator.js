@@ -9,9 +9,14 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import FlatListDemo from '../screens/FlatListDemo';
 import Store from '../screens/Store';
+import NavigationScreen from '../screens/NavigationScreen';
 
 import { Image } from 'react-native';
 import Colors from '../constants/Colors';
+import NavitaionScreen from '../screens/NavigationScreen';
+
+// Navigators
+import { StackNavigator } from 'react-navigation'
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -45,16 +50,22 @@ const LoginStack = createStackNavigator({
 });
 
 LoginStack.navigationOptions = {
-  tabBarLabel: 'Login',
+  tabBarLabel: 'Timer',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-log-in`
-          : 'md-log-in'
-      }
+    <Image
+      source={require('../assets/images/hourglass75.png')}
+      fadeDuration={0}
+      style={{width: 25, height: 25, tintColor: (focused ? Colors.tabIconSelected : Colors.tabIconDefault)}}
+      color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
     />
+    // <TabBarIcon
+    //   focused={focused}
+    //   name={
+    //     Platform.OS === 'ios'
+    //       ? `ios-log-in`
+    //       : 'md-log-in'
+    //   }
+    // />
   ),
 };
 
@@ -99,12 +110,46 @@ MattersStack.navigationOptions = {
 };
 
 
+/******************** Settings Navigation *****************/
+
+// StackNavigator screens
+import ItemList from '../components/ItemList'
+import Item from '../components/Item'
+
+const Stack = createStackNavigator({
+  ItemList: ItemList,
+    Item: Item,
+  }, {
+    initialRouteName: 'ItemList',
+  });
+
+// const Stack = createStackNavigator({
+//   Home: HomeScreen,
+//   Login: LoginScreen,
+// }, {
+//   initialRouteName: 'Login',
+// });
+
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+  Home: {
+    screen: Stack, 
+    navigationOptions: {
+        header: null,
+    },
+  }
 });
 
+
+// const SettingsStack = createStackNavigator({
+//   Settings: Stack,
+// });
+
 SettingsStack.navigationOptions = {
+  
   tabBarLabel: 'Settings',
+  headerStyle: {
+    backgroundColor: '#f4511e',
+  },
   tabBarIcon: ({ focused }) => (
 
     // <Image
@@ -153,9 +198,9 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator(
   {
     HomeStack,
-    LoginStack,
     LinksStack,
     MattersStack,
+    LoginStack,
     SettingsStack,
   },
   {
