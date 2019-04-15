@@ -45,7 +45,7 @@ const items = [
     render () {
       return (
         <View style={styles.container}>
-          <Text style={styles.text}>{`I'm a StackNavigator!`}</Text>
+          <Text style={styles.text}>{`Settings!`}</Text>
           {items.map(this.renderItem)}
         </View>
 
