@@ -29,3 +29,8 @@ npm i --save react-native-elements
 npm i --save react-native-linear-gradient
 npm i --save react-native-touchable-scale
 npm i --save react-navigation
+
+# swipelistview
+npm i --save react-native-swipe-list-view
+
+
