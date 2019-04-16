@@ -13,6 +13,8 @@ import {
  import { SwipeListView } from 'react-native-swipe-list-view';
  import { Query } from 'react-apollo';
 
+ import { Image } from 'react-native';
+
 const GET_CLIENTS = gql`
 query {
    clients {
@@ -39,15 +41,28 @@ export default class ClientsScreenTest extends React.Component {
     //let headerBackTitle = "< Tilbake";
     //let headerLeft = (<Button style={{color: 'white', tintColor: 'white', fontSize: 10}} title='Edit' onPress={_ => console.log('*** Add new client!')}>Ny</Button>)
     let headerRight = (
-      <Button 
-      style={{color: 'white', tintColor: 'white',fontSize: 10}} 
-      title='Ny' 
-      onPress={_ => navigation.navigate('NewClient', { title: "Ny klient!" })}>Ny</Button>
+      <View>
+              <Button 
+      style={{color: '#fff', tintColor: 'white',fontSize: 10}} 
+      title='Ny'
+      color='#000'
+      onPress={_ => navigation.navigate('NewClient', { title: "Ny klient!" })}></Button>
+
+{/* <Image
+      source={require('../assets/images/hourglass75.png')}
+      fadeDuration={0}
+      style={{width: 25, height: 25, tintColor: '#fff'}}
+      color='#fff'
+    /> */}
+      </View>
+
+
+
     )
-    let headerStyle = {backgroundColor: '#ddd', fontSize: 10}
-    let headerTitleStyle = {color: '#f00'}
-    let headerRightStyle = {color: '#f00'}
-    let headerTintColor = '#f00';
+    let headerStyle = {color: '#fff', backgroundColor: '#ddd', fontSize: 10}
+    let headerTitleStyle = {color: '#000'}
+    let headerRightStyle = {color: '#000'}
+    let headerTintColor = '#000';
 
     return { 
       headerTitle, 

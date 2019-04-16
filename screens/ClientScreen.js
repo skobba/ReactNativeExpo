@@ -56,9 +56,9 @@ export default class ClientScreen extends React.Component {
     //let headerLeft = (<Button style={{color: 'white', tintColor: 'white', fontSize: 10}} title='Edit' onPress={_ => console.log('*** Add new client!')}>Ny</Button>)
     //let headerRight = (<Button style={{color: 'white', tintColor: 'white',fontSize: 10}} title='Ny' onPress={_ => console.log('*** Add new client!')}>Ny</Button>)
     let headerStyle = {backgroundColor: '#ddd', fontSize: 10}
-    let headerTitleStyle = {color: '#f00'}
-    let headerRightStyle = {color: '#f00'}
-    let headerTintColor = '#f00';
+    let headerTitleStyle = {color: '#000'}
+    let headerRightStyle = {color: '#000'}
+    let headerTintColor = '#000';
     return { 
       headerTitle, 
       //headerLeft,

@@ -9,6 +9,17 @@ import { Formik } from 'formik';
 import gql from 'graphql-tag';
 import { Mutation } from "react-apollo";
 
+const TextInputField = ({ label, value, error, handleChange }) => (
+  <View>
+    <Input
+      label={label}
+      value={value}
+      onChangeText={handleChange}
+      errorMessage={error}
+    />
+  </View>
+);
+
 const ClientMutation = gql`
 mutation (
   $name: String!
@@ -46,9 +57,9 @@ export default class NewClientScreen extends React.Component {
     //let headerLeft = (<Button style={{color: 'white', tintColor: 'white', fontSize: 10}} title='Edit' onPress={_ => console.log('*** Add new client!')}>Ny</Button>)
     //let headerRight = (<Button style={{color: 'white', tintColor: 'white',fontSize: 10}} title='Ny' onPress={_ => console.log('*** Add new client!')}>Ny</Button>)
     let headerStyle = {backgroundColor: '#ddd', fontSize: 10}
-    let headerTitleStyle = {color: '#f00'}
-    let headerRightStyle = {color: '#f00'}
-    let headerTintColor = '#f00';
+    let headerTitleStyle = {color: '#000'}
+    let headerRightStyle = {color: '#000'}
+    let headerTintColor = '#000';
     return { 
       headerTitle, 
       //headerLeft,
@@ -127,7 +138,7 @@ export default class NewClientScreen extends React.Component {
                 console.log("*** ERROR - createClient: " + err)
               });
 
-              
+
             }}
           >
             {props => (
