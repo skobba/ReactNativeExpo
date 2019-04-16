@@ -25,7 +25,7 @@ query {
 }
 `;
 
-export default class ClientScreen extends React.Component {
+export default class NewClientScreen extends React.Component {
   constructor(props) {
     super(props)
 
@@ -87,87 +87,12 @@ export default class ClientScreen extends React.Component {
 
   render() {
     return (
-      <Text>ClientSceen!</Text>
+      <Text>NewClientSceen!</Text>
     );
   }
 }
 
 
-
-const ClientComponent = graphql(GET_CLIENTS)(props => {
-  this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
-  this.state = {
-    basic: true,
-    listViewData: Array(20).fill('').map((_, i) => `item #${i}`),
-  };
-
-  const { error, clients } = props.data;
-  if (error) {
-    return <Text>{error}</Text>;
-  }
-  if (clients) {
-    return (
-    //<Text>{JSON.stringify(clients, 0, 2)}</Text>
-
-    
-      <SwipeListView
-      dataSource={this.ds.cloneWithRows(clients)}
-      renderRow={data => (
-        <TouchableHighlight
-          onPress={_ => console.log('You touched me')}
-          style={styles.rowFront}
-          underlayColor={'#AAA'}>
-          <View>
-            <Text>I am {data.name} in a SwipeListView</Text>
-          </View>
-        </TouchableHighlight>
-      )}
-      renderHiddenRow={(data, secId, rowId, rowMap) => (
-        <View style={styles.rowBack}>
-          <Text>Left</Text>
-          <View style={[styles.backRightBtn, styles.backRightBtnLeft]}>
-            <Text style={styles.backTextWhite}>Right</Text>
-          </View>
-          <TouchableOpacity
-            style={[styles.backRightBtn, styles.backRightBtnRight]}
-            onPress={_ => this.deleteRow(secId, rowId, rowMap)}>
-            <Text style={styles.backTextWhite}>Delete</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-      leftOpenValue={75}
-      rightOpenValue={-150}
-    />
-
-
-    // <View style={styles.standalone}>
-    //   <SwipeRow leftOpenValue={75} rightOpenValue={-75}>
-    //     <View style={styles.standaloneRowBack}>
-    //       <Text style={styles.backTextWhite}>Left</Text>
-    //       <Text style={styles.backTextWhite}>Right</Text>
-    //     </View>
-    //     <View style={styles.standaloneRowFront}>
-    //       <Text>I am a standalone SwipeRow</Text>
-    //     </View>
-    //   </SwipeRow>
-    // </View>
-    )
-  }
-
-  return <Text>Loading...</Text>;
-});
-
-
-
-
-const styles2 = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
-});
 
 const styles = StyleSheet.create({
   container: {

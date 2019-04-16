@@ -38,7 +38,12 @@ export default class ClientsScreenTest extends React.Component {
     let headerTitle = 'Klienter';
     //let headerBackTitle = "< Tilbake";
     //let headerLeft = (<Button style={{color: 'white', tintColor: 'white', fontSize: 10}} title='Edit' onPress={_ => console.log('*** Add new client!')}>Ny</Button>)
-    let headerRight = (<Button style={{color: 'white', tintColor: 'white',fontSize: 10}} title='Ny' onPress={_ => console.log('*** Add new client!')}>Ny</Button>)
+    let headerRight = (
+      <Button 
+      style={{color: 'white', tintColor: 'white',fontSize: 10}} 
+      title='Ny' 
+      onPress={_ => navigation.navigate('NewClient', { title: "Ny klient!" })}>Ny</Button>
+    )
     let headerStyle = {backgroundColor: '#ddd', fontSize: 10}
     let headerTitleStyle = {color: '#f00'}
     let headerRightStyle = {color: '#f00'}

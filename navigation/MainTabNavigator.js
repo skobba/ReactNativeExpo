@@ -8,6 +8,7 @@ import TimeScreen from '../screens/TimeScreen';
 import ClientsScreen from '../screens/ClientsScreen';
 import ClientsScreenTest from '../screens/ClientsScreenTest';
 import ClientScreen from '../screens/ClientScreen';
+import NewClientScreen from '../screens/NewClientScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import FlatListDemo from '../screens/FlatListDemo';
 import MatterScreen from '../screens/MatterScreen';
@@ -57,6 +58,7 @@ LoginStack.navigationOptions = {
 const ClientsStack = createStackNavigator({
   Clients: ClientsScreenTest,
   Client: ClientScreen,
+  NewClient: NewClientScreen,
   }, {
     initialRouteName: 'Clients',
 });
