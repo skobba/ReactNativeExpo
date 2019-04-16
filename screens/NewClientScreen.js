@@ -6,6 +6,27 @@ import {
   TextInput
  } from 'react-native';
 import { Formik } from 'formik';
+import gql from 'graphql-tag';
+import { Mutation } from "react-apollo";
+
+const ClientMutation = gql`
+mutation (
+  $name: String!
+  $address: String
+  $email: String
+) {
+createClient(clientInput: {
+  name: $name,
+  address: $address,
+  email: $email
+}) {
+  _id
+  name
+  address
+  email
+}
+}
+`;
 
 export default class NewClientScreen extends React.Component {
   constructor(props) {
@@ -14,23 +35,10 @@ export default class NewClientScreen extends React.Component {
     
     console.log("*** props.navigation.state.params.title: " + props.navigation.state.params.title);//JSON.stringify(props,0,2))
   }
-  
-  // static navigationOptions = {
-  //   title: 'Klienter', 
-  //   headerStyle:{ backgroundColor: '#FFF'},
-  //   headerTitleStyle:{ color: 'green'},
-  //   // header: ({params}) => {
-  //   //   right:
-  //   //   <Button
-  //   //   title = "Test"
-  //   //   onPress = {() => this.params.handleSave() } />
-  //   // }
-  // };
 
   static navigationOptions = ({ navigation }) => {
 
     console.log("*** navigation.state.params.title: " + navigation.state.params.title);//JSON.stringify(props,0,2))
-
 
     //let headerTitle = 'Klienter3';
     let headerTitle = navigation.state.params.title;
@@ -53,37 +61,98 @@ export default class NewClientScreen extends React.Component {
     }
   }
 
-  addPressed = () => {
-    console.log("*** Add new client")
+  saveClient = (values) => {
+    console.log(values);
+
+    const fullname = values.lastname + ", " + values.firstname;
+
+    createClient({ 
+      variables: {
+        name: fullname,
+        address: "Bærum",
+        email: "une@skobba.net"
+      },
+      update: (store, { data: { createClient } } ) => {
+        console.log("*** imperative update with graphql: " + JSON.stringify(createClient, 0 ,5))
+        this.props.updateStoreAfterCreateClient(store, createClient)
+        
+      }
+
+    }).then(clientResult => {
+      console.log("*** client created with graphql!")
+      //console.log("*** client created with graphql: " + JSON.stringify(clientResult, 0 ,5))
+      //this.props.handler(clientResult)
+    })
+    .catch((err) => {
+      console.log("*** ERROR - createClient: " + err)
+    });
+
+
+
+
+
+
   }
-
-
-  state = {
-    creating: false,
-    goToCreatedClient: false,
-    createClient: null,
-    events: [],
-    isLoading: false,
-    selectedEvent: null
-  };
 
   render() {
     return (
-      <Formik
-      initialValues={{ email: '' }}
-      onSubmit={values => console.log(values)}
-    >
-      {props => (
-        <View>
-          <TextInput
-            onChangeText={props.handleChange('email')}
-            onBlur={props.handleBlur('email')}
-            value={props.values.email}
-          />
-          <Button onPress={props.handleSubmit} title="Submit" />
-        </View>
-      )}
-    </Formik>
+
+      <Mutation mutation={ClientMutation}>
+        {(createClient, { data }) => (
+
+          <Formik
+            initialValues={{ firstname: '', lastname: '' }}
+            onSubmit={values => {
+              //this.saveClient(values)
+              const fullname = values.lastname + ", " + values.firstname;
+
+              createClient({ 
+                variables: {
+                  name: fullname,
+                  address: "Bærum",
+                  email: "une@skobba.net"
+                },
+                update: (store, { data: { createClient } } ) => {
+                  console.log("*** imperative update with graphql: " + JSON.stringify(createClient, 0 ,5))
+                  this.props.updateStoreAfterCreateClient(store, createClient)
+                  
+                }
+          
+              }).then(clientResult => {
+                console.log("*** client created with graphql!")
+                //console.log("*** client created with graphql: " + JSON.stringify(clientResult, 0 ,5))
+                //this.props.handler(clientResult)
+              })
+              .catch((err) => {
+                console.log("*** ERROR - createClient: " + err)
+              });
+
+              
+            }}
+          >
+            {props => (
+              <View>
+                <TextInput
+                  onChangeText={props.handleChange('firstname')}
+                  onBlur={props.handleBlur('firstname')}
+                  value={props.values.firstname}
+                />
+                <TextInput
+                  onChangeText={props.handleChange('lastname')}
+                  onBlur={props.handleBlur('lastname')}
+                  value={props.values.lastname}
+                />
+                <Button onPress={props.handleSubmit} title="Submit" />
+              </View>
+            )}
+
+          </Formik>
+        
+        )}
+      </Mutation>
+
+
+
     );
   }
 }
