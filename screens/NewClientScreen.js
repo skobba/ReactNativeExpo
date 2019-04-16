@@ -1,29 +1,11 @@
 import React from 'react';
 import { 
-  ScrollView, 
   StyleSheet, 
-  Text, 
-  TouchableOpacity, 
-  TouchableHighlight, 
   View, 
-  ListView,
-  Button
+  Button,
+  TextInput
  } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
-import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
-
-const GET_CLIENTS = gql`
-query {
-  clients {
-    _id
-    name
-    address
-    updatedAt
-  }
-}
-`;
+import { Formik } from 'formik';
 
 export default class NewClientScreen extends React.Component {
   constructor(props) {
@@ -87,7 +69,21 @@ export default class NewClientScreen extends React.Component {
 
   render() {
     return (
-      <Text>NewClientSceen!</Text>
+      <Formik
+      initialValues={{ email: '' }}
+      onSubmit={values => console.log(values)}
+    >
+      {props => (
+        <View>
+          <TextInput
+            onChangeText={props.handleChange('email')}
+            onBlur={props.handleBlur('email')}
+            value={props.values.email}
+          />
+          <Button onPress={props.handleSubmit} title="Submit" />
+        </View>
+      )}
+    </Formik>
     );
   }
 }

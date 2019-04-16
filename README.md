@@ -34,3 +34,6 @@ npm i --save react-navigation
 npm i --save react-native-swipe-list-view
 
 
+# formik
+npm i --save formik
+

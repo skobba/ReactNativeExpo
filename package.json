@@ -19,6 +19,7 @@
     "clarity-icons-svg": "^0.2.0",
     "expo": "^32.0.0",
     "expo-svg-uri": "^1.0.0",
+    "formik": "^1.5.2",
     "graphql": "^14.2.1",
     "graphql-tag": "^2.10.1",
     "jwt-decode": "^2.2.0",
