@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, NetInfo } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 // import { ApolloClient } from 'apollo-client';
@@ -21,7 +21,8 @@ export default class App extends React.Component {
   };
 
   httpLink = createHttpLink({
-    uri: 'http://localhost:4000',
+    //uri: 'http://localhost:4100',
+    uri: 'https://graph.lovogorden.no',
   });
 
   authLink = setContext(async (_, { headers }) => {
@@ -42,6 +43,21 @@ export default class App extends React.Component {
   
   });
 
+  handleFirstConnectivityChange(connectionInfo) {
+    console.log('First change, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
+    NetInfo.removeEventListener(
+      'connectionChange',
+      this.handleFirstConnectivityChange
+    );
+  }
+
+  constructor(props) {
+    super(props);
+    //this.handleFirstConnectivityChange = this.handleFirstConnectivityChange.bind(this);
+  }
+
+
+
   async componentDidMount() {
     // try {
     //   await GoogleSignIn.initAsync({
@@ -53,6 +69,16 @@ export default class App extends React.Component {
     // } catch ({ message }) {
     //   alert('GoogleSignIn.initAsync(): ' + message);
     // }
+
+    NetInfo.getConnectionInfo().then((connectionInfo) => {
+      console.log('Initial, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
+    });
+     
+    NetInfo.addEventListener(
+      'connectionChange',
+      this.handleFirstConnectivityChange
+    );
+
   }
   
   cache = new InMemoryCache();

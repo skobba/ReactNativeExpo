@@ -92,7 +92,7 @@ export default class ClientsScreenTest extends React.Component {
             return <Text>Loading ...</Text>;
           }
 
-          //return <Text>{JSON.stringify(clients, 0, 2)}</Text>;
+          //return <Text>{JSON.stringify(clients, 0, 2)}</Text>; 
 
           return ( 
             <SwipeListView

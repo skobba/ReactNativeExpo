@@ -52,13 +52,17 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Image
+            {/* <Image
               source={
                 __DEV__
                   ? require('../assets/images/robot-dev.png')
                   : require('../assets/images/robot-prod.png')
               }
               style={styles.welcomeImage}
+            /> */}
+              <Image
+              source={{ uri: "https://drive.lovogorden.no/index.php/avatar/saul.goodman/64?v=2" }}
+              style={{ width: 40, height: 40, margin: 6, borderRadius: 40/2 }}
             />
           </View>
 
@@ -77,20 +81,22 @@ export default class HomeScreen extends React.Component {
             </Text>
           </View>
 
-          <View style={styles.helpContainer}>
+          {/* <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
               <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
+
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
+        {/* <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
 
           <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
             <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
           </View>
-        </View>
+        </View> */}
+
       </View>
       )}
       </AuthConsumer>
