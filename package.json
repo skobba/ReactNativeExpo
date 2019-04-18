@@ -32,7 +32,8 @@
     "react-native-svg": "7.0.0",
     "react-native-swipe-list-view": "^1.5.3",
     "react-native-touchable-scale": "^2.0.0",
-    "react-navigation": "^3.8.1"
+    "react-navigation": "^3.8.1",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",

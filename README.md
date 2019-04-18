@@ -37,3 +37,5 @@ npm i --save react-native-swipe-list-view
 # formik
 npm i --save formik
 
+# yup (validation)
+npm i --save yup

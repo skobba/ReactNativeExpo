@@ -2,6 +2,7 @@ import React from 'react';
 import { 
   StyleSheet, 
   View, 
+  Text,
   Button,
   TextInput,
   SegmentedControlIOS,
@@ -11,6 +12,9 @@ import {
 import { Formik } from 'formik';
 import gql from 'graphql-tag';
 import { Mutation } from "react-apollo";
+
+//import { object as yupObject, string as yupString } from "yup";
+let yup = require('yup');
 
 const TextInputField = ({ label, value, error, handleChange }) => (
   <View>
@@ -124,6 +128,9 @@ export default class NewClientScreen extends React.Component {
               //this.saveClient(values)
               const fullname = values.lastname + ", " + values.firstname;
 
+              console.log("*** createClient: " + fullname)
+              return;
+
               createClient({ 
                 variables: {
                   name: fullname,
@@ -131,8 +138,8 @@ export default class NewClientScreen extends React.Component {
                   email: "une@skobba.net"
                 },
                 update: (store, { data: { createClient } } ) => {
-                  console.log("*** imperative update with graphql: " + JSON.stringify(createClient, 0 ,5))
-                  this.props.updateStoreAfterCreateClient(store, createClient)
+                  //console.log("*** imperative update with graphql: " + JSON.stringify(createClient, 0 ,5))
+                  //this.props.updateStoreAfterCreateClient(store, createClient)
                   
                 }
           
@@ -144,11 +151,22 @@ export default class NewClientScreen extends React.Component {
               .catch((err) => {
                 console.log("*** ERROR - createClient: " + err)
               });
-
-
             }}
+            validationSchema={
+              yup.object().shape({
+                firstname: yup
+                 .string()
+                 .min(2)
+                 .required(),
+                lastname: yup
+                 .string()
+                 .min(2)
+                 .required(),
+                 
+             })}
           >
-            {props => (
+            
+            {({ values, handleChange, handleBlur, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
               <View>
                 {/* <SegmentedControlIOS values={['Person', 'Firma', 'Organisasjon']} /> */}
 
@@ -167,33 +185,48 @@ export default class NewClientScreen extends React.Component {
 
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={props.handleChange('firstname')}
-                  onBlur={props.handleBlur('firstname')}
-                  value={props.values.firstname}
+                  onChangeText={handleChange('firstname')}
+                  onBlur={handleBlur('firstname')}
+                  value={values.firstname}
+                  placeholder="Fornavn"
                 />
+                {touched.firstname && errors.firstname &&
+                  <Text style={{ fontSize: 10, color: 'red' }}>{errors.firstname}</Text>
+                }
+
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={props.handleChange('lastname')}
-                  onBlur={props.handleBlur('lastname')}
-                  value={props.values.lastname}
+                  onChangeText={handleChange('lastname')}
+                  onBlur={handleBlur('lastname')}
+                  value={values.lastname}
+                  placeholder="Etternavn"
                 />
-                <Button style={styles.saveButton} onPress={props.handleSubmit} title="Submit" />
+                {touched.lastname && errors.lastname &&
+                  <Text style={{ fontSize: 10, color: 'red' }}>{errors.lastname}</Text>
+                }
+
+
+                {/* <Button disabled={!isValid} style={styles.saveButton} onPress={handleSubmit} title="Submit" />
 
                 <Button
-  onPress={""}
-  title="Learn More"
-  color="#fff00"
-  accessibilityLabel="Learn more about this purple button"
-/>
+                  onPress={""}
+                  title="Learn More"
+                  color="#fff00"
+                  accessibilityLabel="Learn more about this purple button"
+                /> */}
 
-<TouchableOpacity onPress={""} style={styles.btnClickContain}>
-<Button
-  onPress={""}
-  title="Learn More"
-  color="#fff00"
-  accessibilityLabel="Learn more about this purple button"
-/>
-    </TouchableOpacity>
+                { isValid && 
+                  <TouchableOpacity onPress={handleSubmit} style={styles.btnClickContain}>
+                    <Button
+                      onPress={""}
+                      title="Opprett klient"
+                      color="#fff00"
+                      accessibilityLabel="Learn more about this purple button"
+                      onPress={handleSubmit}
+                    />
+                  </TouchableOpacity>
+                }
+
 
 
               </View>
