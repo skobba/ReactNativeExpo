@@ -3,7 +3,10 @@ import {
   StyleSheet, 
   View, 
   Button,
-  TextInput
+  TextInput,
+  SegmentedControlIOS,
+  TouchableOpacity,
+  ScrollView
  } from 'react-native';
 import { Formik } from 'formik';
 import gql from 'graphql-tag';
@@ -111,6 +114,10 @@ export default class NewClientScreen extends React.Component {
       <Mutation mutation={ClientMutation}>
         {(createClient, { data }) => (
 
+          <View style={styles.container}>
+          <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          
+
           <Formik
             initialValues={{ firstname: '', lastname: '' }}
             onSubmit={values => {
@@ -143,21 +150,58 @@ export default class NewClientScreen extends React.Component {
           >
             {props => (
               <View>
+                {/* <SegmentedControlIOS values={['Person', 'Firma', 'Organisasjon']} /> */}
+
+                <SegmentedControlIOS 
+                  tintColor="#D7D7D5"
+                  tintColor="#000"
+                  style={styles.SegmentedControlIOS}
+                  values={['Person', 'Firma', 'Org', 'Stat']}
+                  selectedIndex={0}
+                  onChange={this._onChange}
+                  onValueChange={(val) =>{
+                  this.setState({
+                  value:val
+                  })
+                }}/>    
+
                 <TextInput
+                  style={styles.textInput}
                   onChangeText={props.handleChange('firstname')}
                   onBlur={props.handleBlur('firstname')}
                   value={props.values.firstname}
                 />
                 <TextInput
+                  style={styles.textInput}
                   onChangeText={props.handleChange('lastname')}
                   onBlur={props.handleBlur('lastname')}
                   value={props.values.lastname}
                 />
-                <Button onPress={props.handleSubmit} title="Submit" />
+                <Button style={styles.saveButton} onPress={props.handleSubmit} title="Submit" />
+
+                <Button
+  onPress={""}
+  title="Learn More"
+  color="#fff00"
+  accessibilityLabel="Learn more about this purple button"
+/>
+
+<TouchableOpacity onPress={""} style={styles.btnClickContain}>
+<Button
+  onPress={""}
+  title="Learn More"
+  color="#fff00"
+  accessibilityLabel="Learn more about this purple button"
+/>
+    </TouchableOpacity>
+
+
               </View>
             )}
 
           </Formik>
+          </ScrollView>
+          </View>
         
         )}
       </Mutation>
@@ -171,15 +215,40 @@ export default class NewClientScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
+  btnClickContain: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    alignSelf: 'stretch',
+    backgroundColor: '#009D6E',
+    borderRadius: 5,
+    padding: 5,
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  saveButton: {
+    color: '#000000',
+  },
+  textInput: {
+    borderWidth: 1,
+    height: 40,
+    borderRadius: 6,
+    marginTop: 4,
+  },
   container: {
     backgroundColor: 'white',
     flex: 1,
+    padding: 4,
+    spacing: 4,
+    marginTop: 4,
   },
   addButton: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    fontSize: 27,
+    //color: 'rgba(96,100,109, 1)',
     lineHeight: 24,
     textAlign: 'center',
+    color: '#000000',
   },
   standalone: {
     marginTop: 30,

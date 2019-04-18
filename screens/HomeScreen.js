@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  SegmentedControlIOS,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -61,8 +62,8 @@ export default class HomeScreen extends React.Component {
               style={styles.welcomeImage}
             /> */}
               <Image
-              source={{ uri: "https://drive.lovogorden.no/index.php/avatar/saul.goodman/64?v=2" }}
-              style={{ width: 40, height: 40, margin: 6, borderRadius: 40/2 }}
+              source={{ uri: "https://drive.lovogorden.no/index.php/avatar/saul.goodman/100?v=2" }}
+              style={styles.avatarImage}
             />
           </View>
 
@@ -79,6 +80,7 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.getStartedText}>
               Change this text and your app will automatically reload.
             </Text>
+
           </View>
 
           {/* <View style={styles.helpContainer}>
@@ -138,6 +140,14 @@ export default class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  avatarImage: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    marginTop: 3,
+    marginLeft: -10,
+    borderRadius: 100/2,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
