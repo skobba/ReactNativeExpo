@@ -4,7 +4,7 @@ import{ScrollView, StyleSheet,View,ActivityIndicator,FlatList,Text,TouchableOpac
 import MyButton from '../components/MyButton';
 
 import { ListItem } from 'react-native-elements'
-import { Card, Avatar, Icon } from 'react-native-elements';
+import { Card, Avatar, Icon, Header } from 'react-native-elements';
 
 import MatterScreen from './MatterScreen';
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
@@ -29,7 +29,7 @@ const list = [
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Settings',
+    title: 'Settings2',
   };
 
 
@@ -46,6 +46,7 @@ export default class SettingsScreen extends React.Component {
     
       
     <View>
+      
       {
         list.map((l, i) => (
           <ListItem

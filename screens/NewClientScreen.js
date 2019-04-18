@@ -7,14 +7,25 @@ import {
   TextInput,
   SegmentedControlIOS,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
  } from 'react-native';
 import { Formik } from 'formik';
 import gql from 'graphql-tag';
 import { Mutation } from "react-apollo";
 
 //import { object as yupObject, string as yupString } from "yup";
-let yup = require('yup');
+//let yup = require('yup');
+import yup from '../constants/validations'
+//import { yup } from 'yup'
+//import { setLocale } from 'yup';
+
+//import Spinner from 'react-native-spinkit';
+//var Spinner = require('react-spinkit');
+//var Spinner = require('react-native-spinkit');
+
+
+
 
 const TextInputField = ({ label, value, error, handleChange }) => (
   <View>
@@ -47,8 +58,27 @@ createClient(clientInput: {
 `;
 
 export default class NewClientScreen extends React.Component {
+
+  // getInitialState() {
+  //   return {
+  //     index: 0,
+  //     types: ['CircleFlip', 'Bounce', 'Wave', 'WanderingCubes', 'Pulse', 'ChasingDots', 'ThreeBounce', 'Circle', '9CubeGrid', 'WordPress', 'FadingCircle', 'FadingCircleAlt', 'Arc', 'ArcAlt'],
+  //     size: 100,
+  //     color: "#FFFFFF",
+  //     isVisible: true
+  //   }
+  // }
+
   constructor(props) {
     super(props)
+
+    this.state = {
+      index: 0,
+      types: ['CircleFlip', 'Bounce', 'Wave', 'WanderingCubes', 'Pulse', 'ChasingDots', 'ThreeBounce', 'Circle', '9CubeGrid', 'WordPress', 'FadingCircle', 'FadingCircleAlt', 'Arc', 'ArcAlt'],
+      size: 100,
+      color: "#FFFFFF",
+      isVisible: true
+    }
 
     
     console.log("*** props.navigation.state.params.title: " + props.navigation.state.params.title);//JSON.stringify(props,0,2))
@@ -113,6 +143,7 @@ export default class NewClientScreen extends React.Component {
   }
 
   render() {
+
     return (
 
       <Mutation mutation={ClientMutation}>
@@ -152,16 +183,23 @@ export default class NewClientScreen extends React.Component {
                 console.log("*** ERROR - createClient: " + err)
               });
             }}
+
+            //passwordConfirm: Yup.string().equalTo(Yup.ref('password'), 'Passwords must match').required('Required'),
             validationSchema={
               yup.object().shape({
                 firstname: yup
                  .string()
-                 .min(2)
-                 .required(),
+                 .min(2, 'Fornavn må ha minst 2 bokstaver')
+                 .required('Fornavn er påkrevd'),
+                // lastname: yup
+                //  .string()
+                //  .min(2)
+                //  .required(),
                 lastname: yup
-                 .string()
-                 .min(2)
-                 .required(),
+                .string()
+                //.equalTo(Yup.ref('lastname'), 'Passwords must match')
+                .min(2, 'Etternavn må ha minst 2 bokstaver')
+                .required('Etternavn er påkrevd'),
                  
              })}
           >
@@ -202,7 +240,11 @@ export default class NewClientScreen extends React.Component {
                   placeholder="Etternavn"
                 />
                 {touched.lastname && errors.lastname &&
-                  <Text style={{ fontSize: 10, color: 'red' }}>{errors.lastname}</Text>
+
+                  <View>
+                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.lastname}</Text>
+                    {/* <Text style={{ fontSize: 10, color: 'red' }}>{JSON.stringify(errors,0,2)}</Text> */}
+                  </View>
                 }
 
 
@@ -215,7 +257,7 @@ export default class NewClientScreen extends React.Component {
                   accessibilityLabel="Learn more about this purple button"
                 /> */}
 
-                { isValid && 
+                { false && 
                   <TouchableOpacity onPress={handleSubmit} style={styles.btnClickContain}>
                     <Button
                       onPress={""}
@@ -227,6 +269,19 @@ export default class NewClientScreen extends React.Component {
                   </TouchableOpacity>
                 }
 
+                { isValid && 
+                  <ActivityIndicator style={{marginTop: 15}}size="large" color="#000" />
+                }
+
+                
+              
+                {/* <Spinner style={{}} color={'#777'} size={20} type={'Circle'} /> */}
+                {/* <Spinner 
+                style={styles.spinner} 
+                isVisible={this.state.isVisible} 
+                size={this.state.size} 
+                type={'Circle'} 
+                color={this.state.color}/> */}
 
 
               </View>
@@ -257,7 +312,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#009D6E',
     borderRadius: 5,
     padding: 5,
-    marginTop: 5,
+    marginTop: 15,
     marginBottom: 5,
   },
   saveButton: {
@@ -267,7 +322,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 40,
     borderRadius: 6,
-    marginTop: 4,
+    marginTop: 15,
   },
   container: {
     backgroundColor: 'white',

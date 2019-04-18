@@ -10,6 +10,8 @@ import {
     TouchableOpacity,
   } from 'react-native'
 
+import { Header } from 'react-native-elements';
+
 const items = [
     { name: 'one'},
     { name: 'two'},
@@ -25,6 +27,13 @@ const items = [
   
     static navigationOptions = {
         title: 'Settings',
+        header: props => (
+          <Header
+            leftComponent={{ icon: 'menu', color: '#fff' }}
+            centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+            rightComponent={{ icon: 'home', color: '#fff' }}
+          />
+        )
     };
 
     constructor(props) {

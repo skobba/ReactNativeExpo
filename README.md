@@ -39,3 +39,7 @@ npm i --save formik
 
 # yup (validation)
 npm i --save yup
+
+# react-native-spinkit - https://kyleamathews.github.io/react-spinkit/
+npm install react-native-spinkit@latest --save
+react-native link

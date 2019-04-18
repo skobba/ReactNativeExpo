@@ -18,6 +18,8 @@ import { Image } from 'react-native';
 import Colors from '../constants/Colors';
 import NavitaionScreen from '../screens/NavigationScreen';
 
+import { Header } from 'react-native-elements';
+
 // Navigators
 import { StackNavigator } from 'react-navigation'
 

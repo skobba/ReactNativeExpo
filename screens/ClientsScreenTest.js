@@ -59,6 +59,15 @@ export default class ClientsScreenTest extends React.Component {
 
 
     )
+    let headerLeft = (
+      <Button 
+      style={{
+        color: 'white', 
+        tintColor: 'white',
+        fontSize: 10}} 
+        title='Ny' 
+        onPress={_ => console.log('*** Add new client!')}>Ny</Button>
+    )
     let headerStyle = {color: '#fff', backgroundColor: '#ddd', fontSize: 10}
     let headerTitleStyle = {color: '#000'}
     let headerRightStyle = {color: '#000'}
@@ -67,7 +76,7 @@ export default class ClientsScreenTest extends React.Component {
     return { 
       headerTitle, 
       //headerBackTitle,
-      //headerLeft,
+      headerLeft,
       headerRight, 
       headerStyle, 
       headerTitleStyle, 
