@@ -1,9 +1,9 @@
 # Does not return refresh_token
 
+# Bug
+https://github.com/expo/expo/issues/3809
 
 # Keycloak
-
-
 https://accounts.lovogorden.no/auth/realms/lovogorden/.well-known/openid-configuration
 
 https://accounts.lovogorden.no/auth/realms/lovogorden
