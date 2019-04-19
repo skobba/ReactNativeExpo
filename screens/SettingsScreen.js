@@ -10,166 +10,82 @@ import MatterScreen from './MatterScreen';
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
 
-import { createStackNavigator } from 'react-navigation';
-import { StackNavigator } from 'react-navigation'
+import { 
+  createStackNavigator, 
+  createDrawerNavigator, 
+  createBottomTabNavigator,
+  withNavigation, 
+  DrawerActions,
+} from 'react-navigation';
 
-
-const list = [
-  {
-    name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Vice President'
-  },
-  {
-    name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'Vice Chairman'
-  }
-]
+import Screen1 from './Screen1';
+import Screen2 from './Screen2';
 
 export default class SettingsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Settings2',
-  };
 
-
-  goToOtherScreen(screen) {
-    this.props.navigation.navigate(screen);
+  constructor(props) {
+    super(props);
+    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
 
-  render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    // return <ExpoConfigView />;
-    return (
-    
-      
-    <View>
-      
-      {
-        list.map((l, i) => (
-          <ListItem
-            key={i}
-            //leftAvatar={{ source: { uri: l.avatar_url } }}
-
-            // leftAvatar={
-            //   <Avatar
-            //   rounded
-            //   icon={{name: 'user', type: 'font-awesome'}}
-            //   onPress={() => console.log("Works!")}
-            //   activeOpacity={0.7}
-            //   containerStyle={{marginLeft: 0, marginTop: 0}}
-              
-            // />
-            // }
-
-
-            leftIcon={
-              //<Icon name={'chevron-right'} size={20}/>
-              <Image
-                source={require('../assets/images/client75.png')}
-                fadeDuration={0}
-                style={{width: 26, height: 26}}
-              />
-            }
-
-
-            // rightIcon={
-            //   //<Icon name={'chevron-right'} size={20}/>
-            //   <Image
-            //     source={require('../assets/images/client75.png')}
-            //     fadeDuration={0}
-            //     style={{width: 26, height: 26}}
-            //   />
-            // }
-
-            chevronColor="white"
-            chevron
-
-            title={l.name}
-            subtitle={l.subtitle}
-            onPress={() => this.goToOtherScreen("Home")}
-            //ViewComponent={Store}
-          />
-        //   <Avatar
-        //   key={Math.floor((Math.random() * 100))}
-        //   small
-        //   rounded
-        //   icon={{name: 'user', type: 'font-awesome'}}
-        //   onPress={() => console.log("Works!")}
-        //   activeOpacity={0.7}
-        //   containerStyle={{flex: 2, marginLeft: 20, marginTop: 115}}
-        // />
-        ))
-
-
-      }
-
-
-
-
-
-    <ListItem
-        key={"Auth"}
-        leftIcon={
-          // <Icon name={'ios-log-in'} size={20}/>
-          <Image
-          source={require('../assets/images/login80.png')}
-          fadeDuration={0}
-          style={{width: 26, height: 26}}
-        />
-        }
-        chevronColor="white"
-        chevron
-
-        title={"Auth"}
-        subtitle={"Login, logout and div tools"}
-        onPress={() => this.goToOtherScreen("Auth")}
-        //ViewComponent={Store}
+  static navigationOptions = {
+    title: 'Settings',
+    header: props => (
+      <Header
+        leftComponent={{ icon: 'menu', color: '#fff', onPress: () => props.navigation.navigate('Item', { title: 'Mine' }) }}
+        centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+        rightComponent={{ icon: 'home', color: '#fff' }}
       />
+    )
+};
 
-      <ListItem
-        Component={TouchableScale}
-        friction={90} //
-        tension={100} // These props are passed to the parent component (here TouchableScale)
-        activeScale={0.95} //
-        linearGradientProps={{
-          colors: ['#FF9800', '#F44336'],
-          start: [1, 0],
-          end: [0.2, 0],
-        }}
-        //ViewComponent={Store} // Only if no expo
-        leftAvatar={{ rounded: true, source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' } }}
-        title="Chris Jackson"
-        titleStyle={{ color: 'white', fontWeight: 'bold' }}
-        subtitleStyle={{ color: 'white' }}
-        subtitle="Vice Chairman"
-        chevronColor="white"
-        chevron
-        onPress={() => this.goToOtherScreen("Home")}
-/>
+  DrawerNavigatorExample = createDrawerNavigator({
+    //Drawer Optons and indexing
+    Screen1: {
+      //Title
+      screen: Screen1,
+      navigationOptions: {
+        drawerLabel: 'Demo Screen 1',
+      },
+    },
+    Screen2: {
+      //Title
+      screen: Screen2,
+      navigationOptions: {
+        drawerLabel: 'Demo Screen 2',
+      },
+    },
+  });
+
+  //Structure for the navigatin Drawer
+  toggleDrawer = () => {
+    console.log("*** togglerDrawer")
+    //Props to open/close the drawer
+    //this.props.navigation.toggleDrawer();
+    //this.props.navigation.toggleDrawer() 
+    this.props.navigation.dispatch(DrawerActions.toggleDrawer())
+  };
+
+  render() {
+
+    return (
+    <View>
+       <Text style={styles.getStartedText}>
+         Drawer menu demo
+       </Text>
+
+       <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
+          {/*Donute Button Image */}
+          <Icon name={'menu'} size={25}/>
+
+          {/* <Image
+            source={require('./image/drawer.png')}
+            style={{ width: 25, height: 25, marginLeft: 5 }}
+          /> */}
+        </TouchableOpacity>
 
     </View>
-
-      // <View style={styles.container}>
-      //   <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-      //     <View style={styles.getStartedContainer}>
-
-      //       <Text style={styles.getStartedText}>
-      //         Change this text and your app will automatically reload.
-      //       </Text>
-
-      //       <MyButton deleteAllItems={this.handleLogin} buttonText={"Log-in"}/>
-
-      //     </View>
-
-      //   </ScrollView>
-
-      // </View>
-
-    
     )
   }
 }

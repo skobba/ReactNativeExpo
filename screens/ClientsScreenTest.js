@@ -66,7 +66,7 @@ export default class ClientsScreenTest extends React.Component {
         tintColor: 'white',
         fontSize: 10}} 
         title='Ny' 
-        onPress={_ => console.log('*** Add new client!')}>Ny</Button>
+        onPress={_ => navigation.navigate('Drawer', { title: "Ny klient!" })}>Ny</Button>
     )
     let headerStyle = {color: '#fff', backgroundColor: '#ddd', fontSize: 10}
     let headerTitleStyle = {color: '#000'}
@@ -76,7 +76,7 @@ export default class ClientsScreenTest extends React.Component {
     return { 
       headerTitle, 
       //headerBackTitle,
-      headerLeft,
+      //headerLeft,
       headerRight, 
       headerStyle, 
       headerTitleStyle, 

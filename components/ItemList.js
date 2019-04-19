@@ -25,20 +25,20 @@ const items = [
     //   title: 'Stack'
     // }
   
+    constructor(props) {
+      super(props)
+    }
+
     static navigationOptions = {
         title: 'Settings',
         header: props => (
           <Header
-            leftComponent={{ icon: 'menu', color: '#fff' }}
+            leftComponent={{ icon: 'menu', color: '#fff', onPress: () => props.navigation.navigate('Item', { title: 'Mine' }) }}
             centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
             rightComponent={{ icon: 'home', color: '#fff' }}
           />
         )
     };
-
-    constructor(props) {
-        super(props)
-    }
 
     renderItem = (item, i) => {
       return (
